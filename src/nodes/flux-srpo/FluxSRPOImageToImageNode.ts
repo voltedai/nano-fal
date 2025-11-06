@@ -4,6 +4,7 @@ import { configureFalClient, fal } from '../../utils/fal-client.js'
 import { getParameterValue } from '../../utils/parameter-utils.js'
 import { createProgressStrategy } from '../../utils/progress-strategy.js'
 import { uploadBufferToFal } from '../../utils/fal-storage.js'
+import { generateAssetFilename } from '../../utils/asset-utils.js'
 
 interface FluxSrpoImage {
   url?: string
@@ -309,9 +310,11 @@ fluxSrpoImageToImageNode.execute = async ({ inputs, parameters, context }) => {
       }
 
       const response = await fetch(image.url)
+      const contentType = response.headers.get('content-type')
       const arrayBuffer = await response.arrayBuffer()
       const resultBuffer = Buffer.from(arrayBuffer)
-      const uploadResult = await uploadAsset(resultBuffer, { type: 'image' })
+      const filename = generateAssetFilename(image.url, contentType, 'image')
+      const uploadResult = await uploadAsset(resultBuffer, { type: 'image', filename })
 
       if (!uploadResult.uri) {
         throw new Error('Failed to upload transformed image')

@@ -3,6 +3,7 @@ import { QueueStatus } from '@fal-ai/client'
 import { configureFalClient, fal } from '../../utils/fal-client.js'
 import { getParameterValue } from '../../utils/parameter-utils.js'
 import { createProgressStrategy } from '../../utils/progress-strategy.js'
+import { generateVideoFilename } from '../../utils/asset-utils.js'
 
 interface Sora2VideoResponse {
   video?: {
@@ -202,9 +203,13 @@ sora2TextToVideoNode.execute = async ({ inputs, parameters, context }) => {
     }
 
     const response = await fetch(videoUrl)
+    const contentType = response.headers.get('content-type')
     const arrayBuffer = await response.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
-    const uploadResult = await uploadAsset(buffer, { type: 'video' })
+
+    const filename = generateVideoFilename(videoUrl, contentType)
+
+    const uploadResult = await uploadAsset(buffer, { type: 'video', filename })
 
     if (!uploadResult?.uri) {
       throw new Error('Failed to upload generated video')

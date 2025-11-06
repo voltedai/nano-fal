@@ -1,6 +1,7 @@
 import { resolveAsset, uploadAsset } from '@nanograph/sdk'
 import { Readable } from 'node:stream'
 import { uploadBufferToFal } from '../../utils/fal-storage.js'
+import { generateAssetFilename } from '../../utils/asset-utils.js'
 
 export interface FalImageReference {
   url?: string
@@ -96,9 +97,11 @@ export const uploadGeneratedImages = async (images: FalImageReference[]): Promis
     }
 
     const response = await fetch(image.url)
+    const contentType = response.headers.get('content-type')
     const arrayBuffer = await response.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
-    const uploadResult = await uploadAsset(buffer, { type: 'image' })
+    const filename = generateAssetFilename(image.url, contentType, 'image')
+    const uploadResult = await uploadAsset(buffer, { type: 'image', filename })
 
     if (!uploadResult?.uri) {
       throw new Error('Failed to upload generated image')

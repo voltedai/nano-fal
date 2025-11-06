@@ -4,6 +4,7 @@ import { configureFalClient, fal } from '../../utils/fal-client.js'
 import { getParameterValue } from '../../utils/parameter-utils.js'
 import { createSeedanceProgressStrategy } from './progress.js'
 import { uploadBufferToFal } from '../../utils/fal-storage.js'
+import { generateVideoFilename } from '../../utils/asset-utils.js'
 
 interface SeedanceVideoResponse {
   data?: {
@@ -287,9 +288,12 @@ seedanceImageToVideoNode.execute = async ({ inputs, parameters, context }) => {
     }
 
     const response = await fetch(videoUrl)
+    const contentType = response.headers.get('content-type')
     const arrayBuffer = await response.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
-    const uploadResult = await uploadAsset(buffer, { type: 'video' })
+
+    const filename = generateVideoFilename(videoUrl, contentType)
+    const uploadResult = await uploadAsset(buffer, { type: 'video', filename })
 
     if (!uploadResult?.uri) {
       throw new Error('Failed to upload generated video')

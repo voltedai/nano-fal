@@ -4,6 +4,7 @@ import { configureFalClient, fal } from '../../utils/fal-client.js'
 import { getParameterValue } from '../../utils/parameter-utils.js'
 import { createProgressStrategy } from '../../utils/progress-strategy.js'
 import { uploadBufferToFal } from '../../utils/fal-storage.js'
+import { generateAssetFilename } from '../../utils/asset-utils.js'
 
 interface SeedreamEditResponse {
   data: {
@@ -275,9 +276,11 @@ seedreamEditNode.execute = async ({ inputs, parameters, context }) => {
     for (let i = 0; i < result.data.images.length; i++) {
       const imageUrl = result.data.images[i].url
       const response = await fetch(imageUrl)
+      const contentType = response.headers.get('content-type')
       const arrayBuffer = await response.arrayBuffer()
       const buffer = Buffer.from(arrayBuffer)
-      const uploadResult = await uploadAsset(buffer, { type: 'image' })
+      const filename = generateAssetFilename(imageUrl, contentType, 'image')
+      const uploadResult = await uploadAsset(buffer, { type: 'image', filename })
 
       if (!uploadResult.uri) {
         throw new Error('Failed to upload generated image')
