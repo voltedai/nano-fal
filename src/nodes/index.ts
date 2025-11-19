@@ -39,3 +39,6 @@ export * from './moondream2/index.js'
 
 // Sora 2 nodes
 export * from './sora-2/index.js'
+
+// Qwen Image Edit Plus LoRA Gallery nodes
+export * from './qwen-image-edit-plus-lora-gallery/index.js'
