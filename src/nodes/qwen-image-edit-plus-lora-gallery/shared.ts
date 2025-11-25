@@ -49,3 +49,5 @@ export const detectImageFormat = (buffer: Buffer): string => {
 export const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
 
+
+

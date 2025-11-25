@@ -19,6 +19,9 @@ export * from './seedream/index.js'
 // Nano Banana nodes
 export * from './nano-banana/index.js'
 
+// Nano Banana Pro nodes
+export * from './nano-banana-pro/index.js'
+
 // Seedance nodes
 export * from './seedance/index.js'
 
