@@ -48,3 +48,6 @@ export * from './qwen-image-edit-plus-lora-gallery/index.js'
 
 // Z-Image nodes
 export * from './z-image/index.js'
+
+// SeedVR nodes
+export * from './seedvr/index.js'
