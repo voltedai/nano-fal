@@ -51,3 +51,6 @@ export * from './z-image/index.js'
 
 // SeedVR nodes
 export * from './seedvr/index.js'
+
+// Qwen nodes
+export * from './qwen/index.js'
