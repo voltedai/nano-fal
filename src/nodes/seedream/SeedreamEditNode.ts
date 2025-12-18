@@ -52,6 +52,16 @@ const nodeDef: NodeDefinition = {
       type: 'asset:image',
       description: 'Optional additional reference image',
       optional: true
+    },
+    {
+      name: 'width',
+      type: 'number',
+      description: 'Image Width (1920-4096 or total pixels check)'
+    },
+    {
+      name: 'height',
+      type: 'number',
+      description: 'Image Height (1920-4096 or total pixels check)'
     }
   ],
   outputs: [
@@ -67,26 +77,7 @@ const nodeDef: NodeDefinition = {
     }
   ],
   parameters: [
-    {
-      name: 'image_width',
-      type: 'number',
-      value: 1280,
-      default: 1280,
-      label: 'Image Width',
-      description: 'Width of the generated image (1024 - 4096)',
-      min: 1024,
-      max: 4096
-    },
-    {
-      name: 'image_height',
-      type: 'number',
-      value: 1280,
-      default: 1280,
-      label: 'Image Height',
-      description: 'Height of the generated image (1024 - 4096)',
-      min: 1024,
-      max: 4096
-    },
+
     {
       name: 'num_images',
       type: 'number',
@@ -122,14 +113,6 @@ const nodeDef: NodeDefinition = {
       default: true,
       label: 'Enable Safety Checker',
       description: 'Toggle the Seedream safety checker'
-    },
-    {
-      name: 'sync_mode',
-      type: 'boolean',
-      value: false,
-      default: false,
-      label: 'Sync Mode',
-      description: 'Wait for images to upload before returning'
     }
   ]
 }
@@ -193,13 +176,32 @@ seedreamEditNode.execute = async ({ inputs, parameters, context }) => {
     throw new Error('At least one input image is required')
   }
 
-  const imageWidth = clamp(Number(getParameterValue(parameters, 'image_width', 1280)), 1024, 4096)
-  const imageHeight = clamp(Number(getParameterValue(parameters, 'image_height', 1280)), 1024, 4096)
+  const imageWidth = Number(inputs.width?.[0] ?? 1280)
+  const imageHeight = Number(inputs.height?.[0] ?? 1280)
+
+  // Validation: Width and height must be between 1920 and 4096, 
+  // or total number of pixels must be between 2560*1440 (3,686,400) and 4096*4096 (16,777,216)
+  const minDim = 1920
+  const maxDim = 4096
+  const minPixels = 2560 * 1440
+  const maxPixels = 4096 * 4096
+
+  const dimValid = imageWidth >= minDim && imageWidth <= maxDim && imageHeight >= minDim && imageHeight <= maxDim
+  const pixels = imageWidth * imageHeight
+  const pixelsValid = pixels >= minPixels && pixels <= maxPixels
+
+  if (!dimValid && !pixelsValid) {
+    const msg = `Invalid image dimensions: ${imageWidth}x${imageHeight}. ` +
+      `Must be between ${minDim}x${minDim} and ${maxDim}x${maxDim}, ` +
+      `OR total pixels between ${minPixels} and ${maxPixels}.`
+    context.sendStatus({ type: 'error', message: msg })
+    throw new Error(msg)
+  }
+
   const numImages = clamp(Number(getParameterValue(parameters, 'num_images', 1)), 1, 6)
   const maxImages = clamp(Number(getParameterValue(parameters, 'max_images', 1)), 1, 6)
   const seedValue = Number(getParameterValue(parameters, 'seed', -1))
   const enableSafetyChecker = Boolean(getParameterValue(parameters, 'enable_safety_checker', true))
-  const syncMode = Boolean(getParameterValue(parameters, 'sync_mode', false))
 
   context.sendStatus({ type: 'running', message: 'Preparing input images...' })
 
@@ -230,7 +232,7 @@ seedreamEditNode.execute = async ({ inputs, parameters, context }) => {
       num_images: numImages,
       max_images: Math.max(numImages, maxImages),
       enable_safety_checker: enableSafetyChecker,
-      sync_mode: syncMode
+
     }
 
     if (Number.isInteger(seedValue) && seedValue >= 0) {
