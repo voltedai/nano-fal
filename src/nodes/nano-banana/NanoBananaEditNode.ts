@@ -74,7 +74,7 @@ const detectImageFormat = (buffer: Buffer): string => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-nano-banana-edit',
   name: 'Nano Banana Edit',
-  category: 'Image Editing',
+  category: 'Nano Banana / Standard',
   version: '1.0.0',
   type: 'server',
   description: 'Edits images using the Fal.ai Nano Banana edit model',

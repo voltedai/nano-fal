@@ -59,7 +59,7 @@ const ensurePreset = (value: unknown): (typeof IMAGE_SIZE_PRESETS)[number] => {
 const nodeDefinition: NodeDefinition = {
     uid: 'fal-z-image-turbo-controlnet-lora',
     name: 'Z-Image Turbo ControlNet (LoRA)',
-    category: 'Image Generation',
+    category: 'Z-Image / Turbo',
     version: '1.0.0',
     type: 'server',
     description: 'Generates images using Z-Image Turbo with ControlNet guidance and LoRA support',

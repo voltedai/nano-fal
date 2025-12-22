@@ -17,7 +17,7 @@ interface QwenRemoveElementResponse {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-qwen-remove-element',
   name: 'Qwen Remove Element',
-  category: 'Image Editing',
+  category: 'Qwen / Gallery',
   version: '1.0.0',
   type: 'server',
   description: 'Remove/delete elements (objects, people, text) from the image',
@@ -127,7 +127,7 @@ const nodeDefinition: NodeDefinition = {
     },
     {
       name: 'negative_prompt',
-      type: 'string',
+      type: 'text',
       value: ' ',
       default: ' ',
       label: 'Negative Prompt',
@@ -274,13 +274,13 @@ qwenRemoveElementNode.execute = async ({ inputs, parameters, context }) => {
           context.sendStatus({ type: 'running', message: r.message, progress: r.progress })
         }
       }
-    }) as QwenRemoveElementResponse
+    }) as unknown as QwenRemoveElementResponse
 
     // Check both result.images and result.data.images
     const directImages = result.images
     const dataImages = (result as any)?.data?.images
     const images = directImages ?? dataImages ?? []
-    
+
     if (!images.length) {
       throw new Error('No images were returned by the Qwen Remove Element API')
     }

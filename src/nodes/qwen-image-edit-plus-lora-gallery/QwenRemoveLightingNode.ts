@@ -17,7 +17,7 @@ interface QwenRemoveLightingResponse {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-qwen-remove-lighting',
   name: 'Qwen Remove Lighting',
-  category: 'Image Editing',
+  category: 'Qwen / Gallery',
   version: '1.0.0',
   type: 'server',
   description: 'Remove existing lighting and apply soft even lighting to images',
@@ -122,7 +122,7 @@ const nodeDefinition: NodeDefinition = {
     },
     {
       name: 'negative_prompt',
-      type: 'string',
+      type: 'text',
       value: ' ',
       default: ' ',
       label: 'Negative Prompt',
@@ -250,13 +250,13 @@ qwenRemoveLightingNode.execute = async ({ inputs, parameters, context }) => {
           context.sendStatus({ type: 'running', message: r.message, progress: r.progress })
         }
       }
-    }) as QwenRemoveLightingResponse
+    }) as unknown as QwenRemoveLightingResponse
 
     // Check both result.images and result.data.images
     const directImages = result.images
     const dataImages = (result as any)?.data?.images
     const images = directImages ?? dataImages ?? []
-    
+
     if (!images.length) {
       throw new Error('No images were returned by the Qwen Remove Lighting API')
     }

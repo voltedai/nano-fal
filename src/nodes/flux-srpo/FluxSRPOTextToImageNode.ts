@@ -23,7 +23,7 @@ const allowedAccelerations = new Set(['none', 'regular', 'high'])
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-srpo-text-to-image',
   name: 'Flux SRPO Text to Image',
-  category: 'Image Generation',
+  category: 'Flux / Flux SRPO',
   version: '1.0.0',
   type: 'server',
   description: 'Generates images from text prompts using the Fal.ai Flux SRPO model',

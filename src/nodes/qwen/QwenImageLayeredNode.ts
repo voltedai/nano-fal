@@ -23,7 +23,7 @@ interface QwenImageLayeredResponse {
 const nodeDefinition: NodeDefinition = {
     uid: 'fal-ai-qwen-image-layered',
     name: 'Qwen Image Layered',
-    category: 'Image Editing',
+    category: 'Qwen / Qwen 2.5',
     version: '1.0.0',
     type: 'server',
     description: 'Generate layered variations of an image using Qwen Image Layered',

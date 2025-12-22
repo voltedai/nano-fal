@@ -68,7 +68,7 @@ const bufferToDataUrl = (buffer: Buffer): string => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-sora-2-image-to-video',
   name: 'Sora 2 Image to Video',
-  category: 'Video Generation',
+  category: 'Sora / Sora 2',
   version: '1.0.0',
   type: 'server',
   description: 'Animates images into videos using Fal.ai Sora 2 models',
@@ -174,13 +174,13 @@ sora2ImageToVideoNode.execute = async ({ inputs, parameters, context }) => {
 
   const modelVariantRaw = getParameterValue<string>(parameters, 'model_variant', 'standard')
   const modelVariant = modelVariantRaw === 'pro' ? 'pro' : 'standard'
-  
+
   const resolutionValue = getParameterValue<string>(parameters, 'resolution', 'auto')
   const aspectRatioValue = getParameterValue<string>(parameters, 'aspect_ratio', 'auto')
   const durationValue = getParameterValue<string>(parameters, 'duration', '4')
   const apiKeyValue = getParameterValue<string>(parameters, 'api_key', '')
 
-  const resolution = modelVariant === 'pro' 
+  const resolution = modelVariant === 'pro'
     ? ensureOption(resolutionValue, RESOLUTIONS_PRO, 'auto')
     : ensureOption(resolutionValue, RESOLUTIONS_STANDARD, 'auto')
 
@@ -197,17 +197,17 @@ sora2ImageToVideoNode.execute = async ({ inputs, parameters, context }) => {
   try {
     const imageBuffer: Buffer = await resolveAsset(image, { asBuffer: true }) as Buffer
     console.log(`[Sora2ImageToVideo] Image buffer size: ${imageBuffer.length} bytes`)
-    
+
     const format = detectImageMime(imageBuffer)
     console.log(`[Sora2ImageToVideo] Detected image format: ${format}`)
-    
+
     const blob = new Blob([new Uint8Array(imageBuffer)], { type: `image/${format}` })
     console.log(`[Sora2ImageToVideo] Created blob, size: ${blob.size} bytes, type: ${blob.type}`)
-    
+
     console.log(`[Sora2ImageToVideo] Calling fal.storage.upload...`)
     const imageUrl = await fal.storage.upload(blob) as string
     console.log(`[Sora2ImageToVideo] Storage upload result: ${imageUrl}`)
-    
+
     if (!imageUrl) {
       throw new Error('Fal storage upload did not return a URL')
     }
@@ -238,14 +238,14 @@ sora2ImageToVideoNode.execute = async ({ inputs, parameters, context }) => {
       finalizingMessage: 'Finalizing video...',
       defaultInProgressMessage: (n) => `Processing step ${n}...`
     })
-    
+
     const result = await fal.subscribe(endpoint, {
       input: payload,
       logs: true,
       onQueueUpdate: (status: QueueStatus) => {
         try {
           console.log(`[Sora2ImageToVideo] Queue update:`, JSON.stringify(status, null, 2))
-        } catch {}
+        } catch { }
         if (status.status === 'IN_QUEUE') {
           const r = strategy.onQueue()
           context.sendStatus({ type: 'running', message: r.message, progress: r.progress })
@@ -286,15 +286,15 @@ sora2ImageToVideoNode.execute = async ({ inputs, parameters, context }) => {
     }
   } catch (error: any) {
     console.log(`[Sora2ImageToVideo] Error details:`, JSON.stringify(error, null, 2))
-    
+
     let message = error?.message || 'Failed to animate image with Sora 2'
-    
+
     // Extract detailed error message from Fal API response
     if (error?.body?.detail && Array.isArray(error.body.detail)) {
       const errorDetails = error.body.detail.map((detail: any) => detail.msg).join('; ')
       message = errorDetails
     }
-    
+
     context.sendStatus({ type: 'error', message })
     throw error
   }

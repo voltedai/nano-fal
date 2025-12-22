@@ -62,7 +62,7 @@ const uploadBufferAsImageUrl = async (buffer: Buffer, filenamePrefix: string): P
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-veo3-image-to-video',
   name: 'Veo 3 Image to Video',
-  category: 'Video Generation',
+  category: 'Veo / Veo 3',
   version: '1.0.0',
   type: 'server',
   description: 'Animates input images into videos using Fal.ai Veo 3 models',
@@ -211,7 +211,7 @@ veo3ImageToVideoNode.execute = async ({ inputs, parameters, context }) => {
       onQueueUpdate: (status: QueueStatus) => {
         try {
           console.log('[Veo3ImageToVideo] Queue update:', JSON.stringify(status))
-        } catch {}
+        } catch { }
         if (status.status === 'IN_QUEUE') {
           context.sendStatus({
             type: 'running',

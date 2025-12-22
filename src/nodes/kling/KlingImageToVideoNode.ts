@@ -17,7 +17,7 @@ interface KlingVideoResponse {
 const nodeDef: NodeDefinition = {
   uid: 'kling-image-to-video',
   name: 'Kling Image to Video',
-  category: 'Video Generation',
+  category: 'Kling',
   version: '1.0.0',
   type: 'server',
   description: 'Generates videos from images using Fal.ai Kling 2.1 Master model',
@@ -144,7 +144,7 @@ klingImageToVideoNode.execute = async ({ inputs, parameters, context }) => {
     // Get the video URL, fetch it and upload as asset
     const videoUrl = result.data.video.url
     console.log('Generated video URL:', videoUrl)
-    
+
     const response = await fetch(videoUrl)
     const contentType = response.headers.get('content-type')
     const arrayBuffer = await response.arrayBuffer()

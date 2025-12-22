@@ -56,7 +56,7 @@ const ensurePreset = (value: unknown): (typeof IMAGE_SIZE_PRESETS)[number] => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-z-image-turbo',
   name: 'Z-Image Turbo',
-  category: 'Image Generation',
+  category: 'Z-Image / Turbo',
   version: '1.0.0',
   type: 'server',
   description: 'Generates images from text prompts using Fal.ai\'s Z-Image Turbo model',

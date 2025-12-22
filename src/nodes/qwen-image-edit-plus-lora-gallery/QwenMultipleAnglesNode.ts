@@ -17,7 +17,7 @@ interface QwenMultipleAnglesResponse {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-qwen-multiple-angles',
   name: 'Qwen Multiple Angles',
-  category: 'Image Editing',
+  category: 'Qwen / Gallery',
   version: '1.0.0',
   type: 'server',
   description: 'Camera control with precise adjustments for multiple angles',
@@ -171,7 +171,7 @@ const nodeDefinition: NodeDefinition = {
     },
     {
       name: 'negative_prompt',
-      type: 'string',
+      type: 'text',
       value: ' ',
       default: ' ',
       label: 'Negative Prompt',
@@ -299,13 +299,13 @@ qwenMultipleAnglesNode.execute = async ({ inputs, parameters, context }) => {
           context.sendStatus({ type: 'running', message: r.message, progress: r.progress })
         }
       }
-    }) as QwenMultipleAnglesResponse
+    }) as unknown as QwenMultipleAnglesResponse
 
     // Check both result.images and result.data.images
     const directImages = result.images
     const dataImages = (result as any)?.data?.images
     const images = directImages ?? dataImages ?? []
-    
+
     if (!images.length) {
       throw new Error('No images were returned by the Qwen Multiple Angles API')
     }

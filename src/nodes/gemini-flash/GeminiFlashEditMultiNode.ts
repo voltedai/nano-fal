@@ -57,7 +57,7 @@ interface GeminiFlashEditMultiResponse {
 const nodeDef: NodeDefinition = {
   uid: 'gemini-flash-edit-multi',
   name: 'Gemini Flash Edit Multi',
-  category: 'Image Editing',
+  category: 'Gemini / Gemini Flash',
   version: '1.0.0',
   type: 'server',
   description: 'Edits multiple images using text prompts and reference images with Gemini Flash Edit Multi',
@@ -126,7 +126,7 @@ geminiFlashEditMultiNode.execute = async ({ inputs, parameters, context }) => {
 
   // Collect all provided images
   const inputImages = [image1, image2, image3, image4].filter(img => img !== undefined)
-  
+
   if (inputImages.length === 0) {
     context.sendStatus({ type: 'error', message: 'At least one input image is required' })
     throw new Error('At least one input image is required')
@@ -193,11 +193,11 @@ geminiFlashEditMultiNode.execute = async ({ inputs, parameters, context }) => {
     // Get the edited image URL, fetch it and upload as asset
     const imageUrl = result.data.image.url
     console.log('Generated edited image URL:', imageUrl)
-    
+
     const response = await fetch(imageUrl)
     const arrayBuffer = await response.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
-    
+
     console.log('Uploading edited image as asset...')
     const uploadResult = await uploadAsset(buffer, {
       type: 'image',

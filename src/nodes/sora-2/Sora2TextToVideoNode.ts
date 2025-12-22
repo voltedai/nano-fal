@@ -33,7 +33,7 @@ const ensureOption = <T extends string | number>(value: unknown, options: readon
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-sora-2-text-to-video',
   name: 'Sora 2 Text to Video',
-  category: 'Video Generation',
+  category: 'Sora / Sora 2',
   version: '1.0.0',
   type: 'server',
   description: 'Generates videos from text prompts using Fal.ai Sora 2 models',
@@ -126,13 +126,13 @@ sora2TextToVideoNode.execute = async ({ inputs, parameters, context }) => {
 
   const modelVariantRaw = getParameterValue<string>(parameters, 'model_variant', 'standard')
   const modelVariant = modelVariantRaw === 'pro' ? 'pro' : 'standard'
-  
+
   const resolutionValue = getParameterValue<string>(parameters, 'resolution', '720p')
   const aspectRatioValue = getParameterValue<string>(parameters, 'aspect_ratio', '16:9')
   const durationValue = getParameterValue<string>(parameters, 'duration', '4')
   const apiKeyValue = getParameterValue<string>(parameters, 'api_key', '')
 
-  const resolution = modelVariant === 'pro' 
+  const resolution = modelVariant === 'pro'
     ? ensureOption(resolutionValue, RESOLUTIONS_PRO, '720p')
     : ensureOption(resolutionValue, RESOLUTIONS_STANDARD, '720p')
 
@@ -172,14 +172,14 @@ sora2TextToVideoNode.execute = async ({ inputs, parameters, context }) => {
       finalizingMessage: 'Finalizing video...',
       defaultInProgressMessage: (n) => `Processing step ${n}...`
     })
-    
+
     const result = await fal.subscribe(endpoint, {
       input: payload,
       logs: true,
       onQueueUpdate: (status: QueueStatus) => {
         try {
           console.log(`[Sora2TextToVideo] Queue update:`, JSON.stringify(status, null, 2))
-        } catch {}
+        } catch { }
         if (status.status === 'IN_QUEUE') {
           const r = strategy.onQueue()
           context.sendStatus({ type: 'running', message: r.message, progress: r.progress })
@@ -220,15 +220,15 @@ sora2TextToVideoNode.execute = async ({ inputs, parameters, context }) => {
     }
   } catch (error: any) {
     console.log(`[Sora2TextToVideo] Error details:`, JSON.stringify(error, null, 2))
-    
+
     let message = error?.message || 'Failed to generate video'
-    
+
     // Extract detailed error message from Fal API response
     if (error?.body?.detail && Array.isArray(error.body.detail)) {
       const errorDetails = error.body.detail.map((detail: any) => detail.msg).join('; ')
       message = errorDetails
     }
-    
+
     context.sendStatus({ type: 'error', message })
     throw error
   }

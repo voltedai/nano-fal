@@ -25,7 +25,7 @@ interface QwenImageEditPlusResponse {
 const nodeDefinition: NodeDefinition = {
     uid: 'fal-ai-qwen-image-edit-plus',
     name: 'Qwen Image Edit Plus',
-    category: 'Image Editing',
+    category: 'Qwen / Qwen 2.5',
     version: '1.0.0',
     type: 'server',
     description: 'Edit images using Fal.ai Qwen Image Edit Plus model',

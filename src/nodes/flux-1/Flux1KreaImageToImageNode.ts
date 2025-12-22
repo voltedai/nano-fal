@@ -29,7 +29,7 @@ const clampNumber = (value: number, min: number, max: number): number => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux1-krea-image-to-image',
   name: 'Flux-1 Krea Image to Image',
-  category: 'Image Editing',
+  category: 'Flux / Krea 1.1',
   version: '1.0.0',
   type: 'server',
   description: 'Creates Flux-1 Krea variations from an input image and prompt',

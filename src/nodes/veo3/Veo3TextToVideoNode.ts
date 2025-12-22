@@ -28,7 +28,7 @@ const ensureOption = <T extends string>(value: unknown, options: readonly T[], f
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-veo3-text-to-video',
   name: 'Veo 3 Text to Video',
-  category: 'Video Generation',
+  category: 'Veo / Veo 3',
   version: '1.0.0',
   type: 'server',
   description: 'Generates narrated videos from text prompts using Fal.ai Veo 3 models',
@@ -217,7 +217,7 @@ veo3TextToVideoNode.execute = async ({ inputs, parameters, context }) => {
       onQueueUpdate: (status: QueueStatus) => {
         try {
           console.log('[Veo3TextToVideo] Queue update:', JSON.stringify(status))
-        } catch {}
+        } catch { }
         if (status.status === 'IN_QUEUE') {
           const r = strategy.onQueue()
           context.sendStatus({ type: 'running', message: r.message, progress: r.progress })

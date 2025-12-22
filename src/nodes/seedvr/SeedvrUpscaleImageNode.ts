@@ -22,7 +22,7 @@ const OUTPUT_FORMATS = ['jpg', 'png', 'webp'] as const
 const nodeDefinition: NodeDefinition = {
     uid: 'fal-seedvr-upscale-image',
     name: 'SeedVR Upscale Image',
-    category: 'Image Enhancement',
+    category: 'SeedVR',
     version: '1.0.0',
     type: 'server',
     description: 'Upscale images using SeedVR model',

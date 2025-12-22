@@ -21,7 +21,7 @@ const DURATIONS = ['8s'] as const
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-veo31-image-to-video',
   name: 'Veo 3.1 Image to Video',
-  category: 'Video Generation',
+  category: 'Veo / Veo 3.1',
   version: '1.0.0',
   type: 'server',
   description: 'Animates input images into videos using Fal.ai Veo 3.1 models',
@@ -170,7 +170,7 @@ veo31ImageToVideoNode.execute = async ({ inputs, parameters, context }) => {
       onQueueUpdate: (status: QueueStatus) => {
         try {
           console.log('[Veo31ImageToVideo] Queue update:', JSON.stringify(status))
-        } catch {}
+        } catch { }
 
         if (status.status === 'IN_QUEUE') {
           const r = strategy.onQueue()

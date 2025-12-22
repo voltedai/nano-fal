@@ -24,7 +24,7 @@ const OUTPUT_WRITE_MODES = ['fast', 'balanced', 'small'] as const
 const nodeDefinition: NodeDefinition = {
     uid: 'fal-seedvr-upscale-video',
     name: 'SeedVR Upscale Video',
-    category: 'Video Enhancement',
+    category: 'SeedVR',
     version: '1.0.0',
     type: 'server',
     description: 'Upscale videos using SeedVR model',

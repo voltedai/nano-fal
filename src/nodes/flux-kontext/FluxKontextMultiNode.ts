@@ -71,7 +71,7 @@ const detectImageFormat = (buffer: Buffer): 'jpeg' | 'png' | 'webp' => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-kontext-multi',
   name: 'Flux Kontext Multi-Image Edit',
-  category: 'Image Editing',
+  category: 'Flux / Flux Kontext',
   version: '1.1.0',
   type: 'server',
   description: 'Blends multiple reference images using Fal.ai Flux Kontext multi-image models',

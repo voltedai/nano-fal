@@ -20,7 +20,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 const nodeDef: NodeDefinition = {
   uid: 'fal-seedream-edit',
   name: 'Seedream v4 Edit',
-  category: 'Image Editing',
+  category: 'Seedream',
   version: '1.0.0',
   type: 'server',
   description: 'Edits images using the Fal.ai Bytedance Seedream v4 Edit model',

@@ -70,7 +70,7 @@ const uploadBufferAsImageUrl = async (buffer: Buffer, filenamePrefix: string): P
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-seedance-image-to-video',
   name: 'Seedance Image to Video',
-  category: 'Video Generation',
+  category: 'Seedance',
   version: '1.0.0',
   type: 'server',
   description: 'Animates images into videos using Fal.ai Bytedance Seedance models',

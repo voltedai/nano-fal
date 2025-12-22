@@ -56,7 +56,7 @@ const ensurePreset = (value: unknown): (typeof IMAGE_SIZE_PRESETS)[number] => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux1-krea-redux',
   name: 'Flux-1 Krea Redux',
-  category: 'Image Editing',
+  category: 'Flux / Krea 1.1',
   version: '1.0.0',
   type: 'server',
   description: 'Upscales or refreshes images using Fal.ai\'s Flux-1 Krea Redux endpoint',
