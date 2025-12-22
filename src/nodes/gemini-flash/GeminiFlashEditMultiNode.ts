@@ -57,7 +57,7 @@ interface GeminiFlashEditMultiResponse {
 const nodeDef: NodeDefinition = {
   uid: 'gemini-flash-edit-multi',
   name: 'Gemini Flash Edit Multi',
-  category: 'Fal AI / Gemini / Gemini Flash',
+  category: 'Gemini / Gemini Flash',
   version: '1.0.0',
   type: 'server',
   description: 'Edits multiple images using text prompts and reference images with Gemini Flash Edit Multi',
