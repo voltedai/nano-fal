@@ -19,7 +19,7 @@ interface Gemini3ProPreviewResponse {
 const nodeDefinition: NodeDefinition = {
     uid: 'fal-ai-gemini-3-pro-image-preview',
     name: 'Gemini 3 Pro Preview',
-    category: 'Image Generation',
+    category: 'Gemini / Gemini 3',
     version: '1.0.0',
     type: 'server',
     description: 'Generate images using Google Gemini 3 Pro',

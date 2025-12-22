@@ -57,7 +57,7 @@ const detectImageFormat = (buffer: Buffer): string => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-srpo-image-to-image',
   name: 'Flux SRPO Image to Image',
-  category: 'Image Editing',
+  category: 'Flux / Flux SRPO',
   version: '1.0.0',
   type: 'server',
   description: 'Transforms an input image using a text prompt with the Fal.ai Flux SRPO image-to-image model',

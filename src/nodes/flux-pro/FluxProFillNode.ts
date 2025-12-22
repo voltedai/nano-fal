@@ -59,7 +59,7 @@ const ensureOption = <T extends string>(value: unknown, options: readonly T[], f
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-pro-fill',
   name: 'Flux Pro Image Fill',
-  category: 'Image Editing',
+  category: 'Flux / Flux Pro',
   version: '1.0.0',
   type: 'server',
   description: 'Performs inpainting using Flux Pro Fill models with optional fine-tuned support',

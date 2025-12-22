@@ -69,7 +69,7 @@ const uploadBufferAsImageUrl = async (buffer: Buffer, filenamePrefix: string): P
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-seedance-reference-to-video',
   name: 'Seedance Reference to Video',
-  category: 'Video Generation',
+  category: 'Seedance',
   version: '1.0.0',
   type: 'server',
   description: 'Generates videos from multiple reference images using Fal.ai Bytedance Seedance Lite',

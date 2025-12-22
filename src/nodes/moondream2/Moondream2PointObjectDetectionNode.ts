@@ -16,7 +16,7 @@ interface MoondreamPointObjectDetectionResponse {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-moondream2-point-object-detection',
   name: 'Moondream 2 Point Object Detection',
-  category: 'Image Analysis',
+  category: 'Moondream / Moondream 2',
   version: '1.0.0',
   type: 'server',
   description: 'Detects specific objects and highlights their locations using Fal.ai Moondream 2 point object detection endpoint',

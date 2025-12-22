@@ -17,7 +17,7 @@ interface QwenGroupPhotoResponse {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-qwen-group-photo',
   name: 'Qwen Group Photo',
-  category: 'Image Editing',
+  category: 'Qwen / Gallery',
   version: '1.0.0',
   type: 'server',
   description: 'Create composite group photos with vintage/retro style',
@@ -144,7 +144,7 @@ const nodeDefinition: NodeDefinition = {
     },
     {
       name: 'negative_prompt',
-      type: 'string',
+      type: 'text',
       value: ' ',
       default: ' ',
       label: 'Negative Prompt',
@@ -307,13 +307,13 @@ qwenGroupPhotoNode.execute = async ({ inputs, parameters, context }) => {
           context.sendStatus({ type: 'running', message: r.message, progress: r.progress })
         }
       }
-    }) as QwenGroupPhotoResponse
+    }) as unknown as QwenGroupPhotoResponse
 
     // Check both result.images and result.data.images
     const directImages = result.images
     const dataImages = (result as any)?.data?.images
     const images = directImages ?? dataImages ?? []
-    
+
     if (!images.length) {
       throw new Error('No images were returned by the Qwen Group Photo API')
     }

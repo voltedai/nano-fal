@@ -27,7 +27,7 @@ const allowedFormats = new Set(['jpeg', 'png', 'webp'])
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-nano-banana-pro-text-to-image',
   name: 'Nano Banana Pro Text to Image',
-  category: 'Image Generation',
+  category: 'Nano Banana / Pro',
   version: '1.0.0',
   type: 'server',
   description: 'Generates images from text prompts using the Fal.ai Nano Banana Pro model',

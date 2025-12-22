@@ -21,7 +21,7 @@ interface Hunyuan3DResponse {
 const nodeDef: NodeDefinition = {
   uid: 'hunyuan3d-image-to-3d',
   name: 'Hunyuan3D Image to 3D',
-  category: '3D Generation',
+  category: 'Hunyuan / Hunyuan 3D',
   version: '1.0.0',
   type: 'server',
   description: 'Generates a 3D model (GLB) from an input image using Fal.ai Hunyuan3D v2',

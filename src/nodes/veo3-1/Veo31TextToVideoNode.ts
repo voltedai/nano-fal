@@ -22,7 +22,7 @@ const RESOLUTIONS = ['720p', '1080p'] as const
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-veo31-text-to-video',
   name: 'Veo 3.1 Text to Video',
-  category: 'Video Generation',
+  category: 'Veo / Veo 3.1',
   version: '1.0.0',
   type: 'server',
   description: 'Generates narrated videos from text prompts using Fal.ai Veo 3.1 models',
@@ -211,7 +211,7 @@ veo31TextToVideoNode.execute = async ({ inputs, parameters, context }) => {
       onQueueUpdate: (status: QueueStatus) => {
         try {
           console.log('[Veo31TextToVideo] Queue update:', JSON.stringify(status))
-        } catch {}
+        } catch { }
 
         if (status.status === 'IN_QUEUE') {
           const r = strategy.onQueue()

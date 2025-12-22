@@ -19,7 +19,7 @@ interface Gemini3ProPreviewEditResponse {
 const nodeDefinition: NodeDefinition = {
     uid: 'fal-ai-gemini-3-pro-image-preview-edit',
     name: 'Gemini 3 Pro Preview Edit',
-    category: 'Image Editing',
+    category: 'Gemini / Gemini 3',
     version: '1.0.0',
     type: 'server',
     description: 'Edit images using Google Gemini 3 Pro',

@@ -85,7 +85,7 @@ const ensureOption = <T extends string>(value: unknown, options: readonly T[], f
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-pro-control-image',
   name: 'Flux Pro Control Image Generation',
-  category: 'Image Generation',
+  category: 'Flux / Flux Pro',
   version: '1.0.0',
   type: 'server',
   description: 'Generates images using Flux Pro ControlNet (Canny/Depth) models, with optional fine-tuned variants',

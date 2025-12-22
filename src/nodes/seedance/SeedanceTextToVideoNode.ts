@@ -35,7 +35,7 @@ const ensureOption = <T extends string>(value: unknown, options: readonly T[], f
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-seedance-text-to-video',
   name: 'Seedance Text to Video',
-  category: 'Video Generation',
+  category: 'Seedance',
   version: '1.0.0',
   type: 'server',
   description: 'Generates videos from text prompts using Fal.ai Bytedance Seedance models',

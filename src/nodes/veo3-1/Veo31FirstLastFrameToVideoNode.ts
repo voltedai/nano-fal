@@ -21,7 +21,7 @@ const DURATIONS = ['8s'] as const
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-veo31-first-last-frame-to-video',
   name: 'Veo 3.1 First & Last Frame to Video',
-  category: 'Video Generation',
+  category: 'Veo / Veo 3.1',
   version: '1.0.0',
   type: 'server',
   description: 'Interpolates a video between the first and last frame using Fal.ai Veo 3.1 models',
@@ -191,7 +191,7 @@ veo31FirstLastFrameToVideoNode.execute = async ({ inputs, parameters, context })
       onQueueUpdate: (status: QueueStatus) => {
         try {
           console.log('[Veo31FirstLastFrameToVideo] Queue update:', JSON.stringify(status))
-        } catch {}
+        } catch { }
 
         if (status.status === 'IN_QUEUE') {
           const r = strategy.onQueue()

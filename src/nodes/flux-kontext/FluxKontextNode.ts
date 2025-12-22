@@ -71,7 +71,7 @@ const detectImageFormat = (buffer: Buffer): 'jpeg' | 'png' | 'webp' => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-kontext',
   name: 'Flux Kontext Image Edit',
-  category: 'Image Editing',
+  category: 'Flux / Flux Kontext',
   version: '1.1.0',
   type: 'server',
   description: 'Edits an input image with text guidance using Fal.ai Flux Kontext models',

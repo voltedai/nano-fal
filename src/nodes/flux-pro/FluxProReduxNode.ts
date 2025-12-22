@@ -78,7 +78,7 @@ const ensureOption = <T extends string>(value: unknown, options: readonly T[], f
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-pro-redux',
   name: 'Flux Pro Image Redux',
-  category: 'Image Editing',
+  category: 'Flux / Flux Pro',
   version: '1.0.0',
   type: 'server',
   description: 'Creates Flux Pro image variations using Flux Redux models, including Ultra support',

@@ -56,7 +56,7 @@ const ensurePreset = (value: unknown): (typeof IMAGE_SIZE_PRESETS)[number] => {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux1-krea-text-to-image',
   name: 'Flux-1 Krea Text to Image',
-  category: 'Image Generation',
+  category: 'Flux / Krea 1.1',
   version: '1.0.0',
   type: 'server',
   description: 'Generates images from text prompts using Fal.ai\'s Flux-1 Krea model',

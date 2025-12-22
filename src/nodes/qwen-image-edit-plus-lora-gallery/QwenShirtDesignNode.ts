@@ -17,7 +17,7 @@ interface QwenShirtDesignResponse {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-qwen-shirt-design',
   name: 'Qwen Shirt Design',
-  category: 'Image Editing',
+  category: 'Qwen / Gallery',
   version: '1.0.0',
   type: 'server',
   description: 'Put designs/graphics on people\'s shirts',
@@ -132,7 +132,7 @@ const nodeDefinition: NodeDefinition = {
     },
     {
       name: 'negative_prompt',
-      type: 'string',
+      type: 'text',
       value: ' ',
       default: ' ',
       label: 'Negative Prompt',
@@ -289,13 +289,13 @@ qwenShirtDesignNode.execute = async ({ inputs, parameters, context }) => {
           context.sendStatus({ type: 'running', message: r.message, progress: r.progress })
         }
       }
-    }) as QwenShirtDesignResponse
+    }) as unknown as QwenShirtDesignResponse
 
     // Check both result.images and result.data.images
     const directImages = result.images
     const dataImages = (result as any)?.data?.images
     const images = directImages ?? dataImages ?? []
-    
+
     if (!images.length) {
       throw new Error('No images were returned by the Qwen Shirt Design API')
     }

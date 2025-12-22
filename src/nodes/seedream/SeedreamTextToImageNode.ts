@@ -19,7 +19,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(Math.max(val
 const nodeDef: NodeDefinition = {
   uid: 'fal-seedream-text-to-image',
   name: 'Seedream v4 Text to Image',
-  category: 'Image Generation',
+  category: 'Seedream',
   version: '1.0.0',
   type: 'server',
   description: 'Generates images from text prompts using the Fal.ai Bytedance Seedream v4 text-to-image model',

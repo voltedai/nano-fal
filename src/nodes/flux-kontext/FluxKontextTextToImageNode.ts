@@ -37,7 +37,7 @@ const ensureOption = <T extends string>(value: unknown, options: readonly T[], f
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-kontext-text-to-image',
   name: 'Flux Kontext Text to Image',
-  category: 'Image Generation',
+  category: 'Flux / Flux Kontext',
   version: '1.0.0',
   type: 'server',
   description: 'Generates images from text prompts using Fal.ai Flux Kontext text-to-image models',

@@ -14,7 +14,7 @@ interface MoondreamDescribeResponse {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-moondream2-describe',
   name: 'Moondream 2 Describe',
-  category: 'Image Analysis',
+  category: 'Moondream / Moondream 2',
   version: '1.0.0',
   type: 'server',
   description: 'Generates a natural language description for an image using Fal.ai Moondream 2',

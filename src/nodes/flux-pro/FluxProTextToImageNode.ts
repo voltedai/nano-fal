@@ -86,7 +86,7 @@ const ensureOption = <T extends string>(value: unknown, options: readonly T[], f
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-flux-pro-text-to-image',
   name: 'Flux Pro Text to Image',
-  category: 'Image Generation',
+  category: 'Flux / Flux Pro',
   version: '1.0.0',
   type: 'server',
   description: 'Generates images from text prompts using Fal Flux Pro models, including Ultra and fine-tuned variants',

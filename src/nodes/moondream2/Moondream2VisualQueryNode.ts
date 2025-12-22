@@ -14,7 +14,7 @@ interface MoondreamVisualQueryResponse {
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-moondream2-visual-query',
   name: 'Moondream 2 Visual Query',
-  category: 'Image Analysis',
+  category: 'Moondream / Moondream 2',
   version: '1.0.0',
   type: 'server',
   description: 'Answers questions about an image using Fal.ai Moondream 2 visual query endpoint',

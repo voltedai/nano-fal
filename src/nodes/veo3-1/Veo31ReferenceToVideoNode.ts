@@ -20,7 +20,7 @@ const DURATIONS = ['8s'] as const
 const nodeDefinition: NodeDefinition = {
   uid: 'fal-veo31-reference-to-video',
   name: 'Veo 3.1 Reference to Video',
-  category: 'Video Generation',
+  category: 'Veo / Veo 3.1',
   version: '1.0.0',
   type: 'server',
   description: 'Generates subject-consistent videos from multiple reference images using Fal.ai Veo 3.1',
@@ -167,7 +167,7 @@ veo31ReferenceToVideoNode.execute = async ({ inputs, parameters, context }) => {
       onQueueUpdate: (status: QueueStatus) => {
         try {
           console.log('[Veo31ReferenceToVideo] Queue update:', JSON.stringify(status))
-        } catch {}
+        } catch { }
 
         if (status.status === 'IN_QUEUE') {
           const r = strategy.onQueue()

@@ -59,7 +59,7 @@ const ensurePreset = (value: unknown): (typeof IMAGE_SIZE_PRESETS)[number] => {
 const nodeDefinition: NodeDefinition = {
     uid: 'fal-z-image-turbo-image-to-image-lora',
     name: 'Z-Image Turbo I2I (LoRA)',
-    category: 'Image Editing',
+    category: 'Z-Image / Turbo',
     version: '1.0.0',
     type: 'server',
     description: 'Image-to-Image generation using Z-Image Turbo with LoRA support',
