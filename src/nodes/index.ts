@@ -54,3 +54,6 @@ export * from './seedvr/index.js'
 
 // Qwen nodes
 export * from './qwen/index.js'
+
+// Gemini Preview nodes
+export * from './gemini-3-preview/index.js'
