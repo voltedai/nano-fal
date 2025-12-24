@@ -7,7 +7,7 @@ import { FalImageReference, uploadGeneratedImages, assetToDataUrl } from '../flu
 import { imageSize } from 'image-size'
 import { resolveAsset } from '@nanograph/sdk'
 
-interface QwenImageEditPlusResponse {
+interface QwenImageEdit2511Response {
     images?: FalImageReference[]
     seed?: number
     has_nsfw_concepts?: boolean[]
@@ -23,12 +23,12 @@ interface QwenImageEditPlusResponse {
 }
 
 const nodeDefinition: NodeDefinition = {
-    uid: 'fal-ai-qwen-image-edit-plus',
-    name: 'Qwen Image Edit 2509',
-    category: 'Qwen / Qwen 2509',
+    uid: 'fal-ai-qwen-image-edit-2511',
+    name: 'Qwen Image Edit 2511',
+    category: 'Qwen / Qwen 2511',
     version: '1.0.0',
     type: 'server',
-    description: "Endpoint for Qwen's Image Editing Plus model also known as Qwen-Image-Edit-2509. Has superior text editing capabilities and multi-image support.",
+    description: 'Edit images using Fal.ai Qwen Image Edit 2511 model',
     inputs: [
         {
             name: 'prompt',
@@ -87,7 +87,7 @@ const nodeDefinition: NodeDefinition = {
             type: 'number',
             value: 50,
             default: 50,
-            min: 2,
+            min: 1,
             max: 100,
             step: 1,
             label: 'Num Inference Steps',
@@ -96,13 +96,13 @@ const nodeDefinition: NodeDefinition = {
         {
             name: 'guidance_scale',
             type: 'number',
-            value: 4,
-            default: 4,
-            min: 0,
+            value: 4.5,
+            default: 4.5,
+            min: 1,
             max: 20,
             step: 0.1,
             label: 'Guidance Scale',
-            description: 'Classifier Free Guidance scale'
+            description: 'The guidance scale to use for the image generation.'
         },
         {
             name: 'num_images',
@@ -208,9 +208,9 @@ const nodeDefinition: NodeDefinition = {
     ]
 }
 
-const qwenImageEditPlusNode: NodeInstance = NanoSDK.registerNode(nodeDefinition)
+const qwenImageEdit2511Node: NodeInstance = NanoSDK.registerNode(nodeDefinition)
 
-qwenImageEditPlusNode.execute = async ({ inputs, parameters, context }) => {
+qwenImageEdit2511Node.execute = async ({ inputs, parameters, context }) => {
     configureFalClient()
 
     const prompt = inputs.prompt?.[0] as string
@@ -221,7 +221,7 @@ qwenImageEditPlusNode.execute = async ({ inputs, parameters, context }) => {
         inputs.image4?.[0] as string | undefined
     ].filter((uri): uri is string => Boolean(uri))
 
-    const negativePrompt = (inputs.negative_prompt?.[0] as string) || ' '
+    const negativePrompt = (inputs.negative_prompt?.[0] as string) || ''
 
     if (!prompt) {
         context.sendStatus({ type: 'error', message: 'Prompt is required' })
@@ -236,7 +236,7 @@ qwenImageEditPlusNode.execute = async ({ inputs, parameters, context }) => {
     const imageUrls = await Promise.all(imageInputs.map(uri => assetToDataUrl(uri)))
 
     const numInferenceSteps = Number(getParameterValue(parameters, 'num_inference_steps', 50))
-    const guidanceScale = Number(getParameterValue(parameters, 'guidance_scale', 4))
+    const guidanceScale = Number(getParameterValue(parameters, 'guidance_scale', 4.5))
     const numImages = Number(getParameterValue(parameters, 'num_images', 1))
     const imageSizeParam = String(getParameterValue(parameters, 'image_size', 'square_hd'))
     const customWidth = Number(getParameterValue(parameters, 'custom_width', 1024))
@@ -293,7 +293,7 @@ qwenImageEditPlusNode.execute = async ({ inputs, parameters, context }) => {
 
     const strategy = createProgressStrategy({
         expectedMs,
-        inQueueMessage: 'Waiting for Qwen Image Edit Plus...',
+        inQueueMessage: 'Waiting for Qwen Image Edit 2.5 (11)...',
         finalizingMessage: 'Finalizing images...',
         defaultInProgressMessage: (step) => `Processing step ${step}...`
     })
@@ -301,7 +301,7 @@ qwenImageEditPlusNode.execute = async ({ inputs, parameters, context }) => {
     try {
         let stepCount = 0
 
-        const result = await fal.subscribe('fal-ai/qwen-image-edit-plus', {
+        const result = await fal.subscribe('fal-ai/qwen-image-edit-2511', {
             input: payload as any,
             logs: true,
             onQueueUpdate: (status: QueueStatus) => {
@@ -317,7 +317,7 @@ qwenImageEditPlusNode.execute = async ({ inputs, parameters, context }) => {
                     context.sendStatus({ type: 'running', message: update.message, progress: update.progress })
                 }
             }
-        }) as QwenImageEditPlusResponse
+        }) as QwenImageEdit2511Response
 
         const images = result.images || result.data?.images || []
 
@@ -333,10 +333,10 @@ qwenImageEditPlusNode.execute = async ({ inputs, parameters, context }) => {
             has_nsfw_concepts: result.has_nsfw_concepts || result.data?.has_nsfw_concepts || []
         }
     } catch (error: any) {
-        const message = error?.message || 'Failed to generate images with Qwen Image Edit Plus'
+        const message = error?.message || 'Failed to generate images with Qwen Image Edit 2.5 (11)'
         context.sendStatus({ type: 'error', message })
         throw error
     }
 }
 
-export default qwenImageEditPlusNode
+export default qwenImageEdit2511Node
