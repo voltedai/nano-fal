@@ -57,3 +57,6 @@ export * from './qwen/index.js'
 
 // Gemini Preview nodes
 export * from './gemini-3-preview/index.js'
+
+// SAM 3 nodes
+export * from './sam-3/index.js'
